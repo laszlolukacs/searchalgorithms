@@ -1,0 +1,84 @@
+Keresés házi feladat
+
+Posted in keresés 
+
+Jelen házi feladat célja az eloadáson elhangzott keresési algoritmusok implementációján keresztül az egyes algoritmusokkal kapcsolatban gyakorlati tapasztalatok szerzése. A számos különbözo algoritmus implementációja segít kidomborítani a módszerek hasonlóságait és különbségeit.
+
+Az algoritmusokat Java nyelven (1.6-os JDK alatt) kell implementálni. A feladat beadása forráskód alakban történik. Az alkalmazás foosztályának a "Search" nevet kell viselnie, de ezen kívül tetszoleges számú további saját osztály felhasználható. 
+
+A program indulása során két parancssori paramétert várjon:
+A bemeneti fájl neve (teljes elérési úttal) 
+A kimeneti fájl neve (teljes elérési úttal) 
+
+A be- és kimeneti fájlok formátumát az alábbiakban ismertetjük.
+ Implementálandó algoritmusok és heurisztikák
+
+Az eloadásokon megismert algoritmusok közül az alábbiak implementálása szükséges:
+Szélességi keresés - vak
+Mélységi keresés - vak
+Egyenletes költségu keresés - vak
+Mohó keresés - informált
+A* keresés - informált
+
+Az eloadásokon megismert heurisztikák közül az alábbiak implementálása szükséges:
+Konstans 0 heurisztika ( = 0 )
+Manhattan (háztömb) távolság ( = |x1 - x2| + |y1 - y2| )
+Légvonalbeli távolság ( = sqrt[(x1 - x2)^2 + (y1 - y2)^2] )
+
+Az algoritmusok és heurisztikák részletes definíciója megtalálható az eloadásanyagban illetve a tankönyvben.
+
+Az algoritmusok bizonyos esetekben nemdeterminisztikus muködést mutatnak, például a mohó algoritmus két azonos heurisztikájú csomópont közül tetszolegesen választhat. Az ehhez hasonló nemdeterminizmust a könnyu gépi ellenorizhetoség érdekében szeretnénk kizárni, ezért alapveto szabály, hogy ahol egy algoritmus ilyen döntési helyzetbe kerül, ott mindig a numerikus azonosító alapján növekvo sorrendben kell a csomópontokat kifejteni.
+
+A tesztfuttatások során lesznek olyan esetek, amikor a csomópontok közül több is célként szerepel. Ilyenkor az algoritmusnak az elso célcsomópont megtalálását követoen meg kell állnia.
+A bemeneti formátum
+
+A keresési gráfot egy szöveges fájl definiálja. A fájl hat blokkra tagolódik, mely blokkokat üres sorok, illetve "#" jellel kezdodo megjegyzés sorok választanak el. Az egyes blokkok formátuma az alábbi:
+Csomópontok
+ Minden sorban 4 darab tabulátorral elválasztott mezo található, melyeknek jelentése az alábbi: 
+A csomópont numerikus azonosítója: a kimenetben ezzel azonosíthatók a csomópontok. 
+A csomópont címkéje: tetszoleges szöveg, amit az opcionális grafikus felület megjeleníthet a csomópont mellett a könnyebb áttekinthetoség érdekében. 
+A csomópont pozíciójának X koordinátája: nem negatív egész érték. 
+A csomópont pozíciójának Y koordinátája: nem negatív egész érték. 
+Élek
+ Minden sorban 3 darab tabulátorral elválasztott mezo található: 
+Az él egyik végpontjának numerikus azonosítója. 
+Az él másik végpontjának numerikus azonosítója. 
+Az él költsége: pozitív egész érték. 
+
+Az élek minden esetben kétirányúak, tehát a bemeneti fájlban csak egyszer jelennek meg, de mindkét irányban azonos költséggel igénybe vehetoek.
+Kiinduló csomópont
+ Ebben a blokkban mindössze egyetlen sor szerepel, mely a kiinduló csomópont numerikus azonosítóját tartalmazza. 
+Célcsomópontok
+ Ebben a blokkban legalább egy sor szerepel. Minden sor egy-egy célcsomópont numerikus azonosítóját tartalmazza. 
+Heurisztika
+ Ebben a blokkban egyetlen sor szerepel egyetlen numerikus értékkel (1-3), mely a felhasználandó heurisztikát azonosítja (a kódolást lásd fent, az implementálandó heurisztikáknál) 
+Keresési algoritmus
+ Ebben a blokkban egyetlen sor szerepel egyetlen numerikus értékkel (1-5), mely a futtatandó algoritmust azonosítja (a kódolást lásd fent, az implementálandó algoritmusoknál) 
+
+A fentiek értelmében a nem informált keresések esetén is definiált egy heurisztika a megfelelo mezoben, melyet ilyenkor az adott keresési algoritmus figyelmen kívül hagy.
+A kimeneti formátum
+
+A kimeneti formátum soronként egy-egy numerikus csomópont azonosítót tartalmaz. Az elso sorban a kiinduló csomópont azonosítója szerepel, az utolsó sorban a megtalált célcsomópont azonosítója, a közbenso sorokban a célhoz vezeto úton szereplo csomópontok kerülnek felsorolásra.
+
+Amennyiben a feladatnak nincs megoldása, akkor a kimeneti fájl teljesen üres (de létre kell hozni). Egyéb esetben a kimeneti fájl nem tartalmazhat üres sorokat, megjegyzéseket vagy a célhoz vezeto úton kívül bármi egyebet. A kimeneti fájlok binárisan kerülnek összehasonlításra a referencia megoldás kimenetével, ezért semmilyen egyéb felesleges karaktert se tartalmazhatnak. A sorvégek mind Windows, mind Unix kódolás szerint elfogadhatóak.
+
+A program standard outputja nem kerül feldolgozásra, ezért ott tetszoleges megjegyzéseket megjeleníthet.
+Értékelés
+
+A tárgy honlapján számos minta be- és kimenet pár elérheto lesz. A megoldást addig semmiképpen nem érdemes beadni, amíg az összes bemeno minta esetén nem generál a kimeno mintával binárisan megegyezo kimenetet.
+
+A beadási határidot követoen a forrásfájlok fordítása és a közzétett mintáktól eltéro tesztesetek futtatása automatizáltan történik. Amennyiben a programban minden algoritmus és minden heurisztika helyesen muködik, akkor a megoldás 7 pontot ér. Ha a program nem fordítható, nem futtatható vagy bármelyik algoritmus hibásan muködik, akkor a beadott megoldás nem fogadható el, és 0 pontot ér.
+
+A beadott megoldások a beadás lezárulta után plágium ellenorzésen esnek át. Amennyiben a forráskód plagizálásának gyanúja felmerül (akár egyes hallgatók között, akár külso források irányában), akkor minden érintett automatikusan 0 pontot kap, illetve további mérlegelés nélkül automatikusan fegyelmi eljárást indítunk.
+
+A beadott programban bármilyen, a feladattal összefüggésbe nem hozható forráskód részlet (különösen az indokolatlan lemezhozzáférés vagy hálózati kapcsolat nyitása) esetén szintén fegyelmi eljárást indítunk.
+Megjegyzések
+
+A kiírt feladatnak nem része semmilyen felhasználói felület, az elkészült programmal szemben mindössze a fájlból olvasás és a fájlba írás az elvárás. Ettol függetlenül erosen ajánlott a programhoz egy egyszeru (a beadott megoldásból kihagyott) felhasználói felületet készíteni, melyen megjelenítheto a gráf, és nyomon követhetok a keresés egyes lépései. Egy ilyen felület a fejlesztés során a hibakeresést, a tesztelés során pedig az algoritmusok viselkedésének mélyebb megértését nagymértékben segíti. 
+
+A beadott forráskódot gépesített módon fordítjuk, majd a lefordított programot kizárólag funkcionálisan ellenorizzük. A feladat értékelése szempontjából nem releváns sem a forráskód struktúrája sem kommentezettsége. Ettol függetlenül erosen javasoljuk, hogy a programot az objektum-orientált szemléletnek megfeleloen tervezzék meg, mivel ez alapveto elvárás lesz a késobbi munkájuk során is, illetve mivel a probléma jól strukturálható (például a csomópontok és az élek alkotják a gráfot; az algoritmusok implementációjának számos közös vonása van, melyek egy ososztállyal jól lefedhetoek; stb.).
+Beadási tudnivalók
+
+A programmal együtt nem szükséges dokumentációt beadni.
+
+A beadás során egy ZIP fájlt várunk, melyben almappa nélkül közvetlenül a Java forrásfájlok foglalnak helyet. Az értékelés során a kitömörítést követoen a kiértékelo program egy javac *.java és számos java Search input_file output_file paranccsal ellenorzi majd a program helyességét. Az ilyen módon nem fordítható illetve futtatható megoldásokat nem tudjuk elfogadni!
