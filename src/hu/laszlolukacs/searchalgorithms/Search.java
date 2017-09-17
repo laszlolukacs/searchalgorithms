@@ -5,7 +5,7 @@
 package hu.laszlolukacs.searchalgorithms;
 
 // the main class, contains the entry point
-public class SearchAlgorithmsApplication {
+public class Search {
 
 	// entry point
 	public static void main(String[] args) {
