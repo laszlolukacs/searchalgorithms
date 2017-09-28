@@ -6,6 +6,8 @@ package hu.laszlolukacs.searchalgorithms;
 
 import java.util.Comparator;
 
+import hu.laszlolukacs.searchalgorithms.models.Node;
+
 public class ComparatorById implements Comparator<Node> {
 
 	public int compare(Node n1, Node n2) {

@@ -2,10 +2,13 @@
  * See LICENSE file
  */
 
-package hu.laszlolukacs.searchalgorithms;
+package hu.laszlolukacs.searchalgorithms.models;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import hu.laszlolukacs.searchalgorithms.ComparatorById;
+import hu.laszlolukacs.searchalgorithms.SearchBase;
 
 // stores the elements of a search
 public class SearchRepository {

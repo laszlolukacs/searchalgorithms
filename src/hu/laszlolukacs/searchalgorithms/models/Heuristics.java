@@ -2,7 +2,7 @@
  * See LICENSE file
  */
 
-package hu.laszlolukacs.searchalgorithms;
+package hu.laszlolukacs.searchalgorithms.models;
 
 import java.util.Collections;
 import java.util.LinkedList;

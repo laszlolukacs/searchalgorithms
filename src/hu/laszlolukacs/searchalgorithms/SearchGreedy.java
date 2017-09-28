@@ -7,6 +7,10 @@ package hu.laszlolukacs.searchalgorithms;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import hu.laszlolukacs.searchalgorithms.models.Heuristics;
+import hu.laszlolukacs.searchalgorithms.models.Node;
+import hu.laszlolukacs.searchalgorithms.models.Vertex;
+
 public class SearchGreedy extends SearchBase {
 
 	private byte _heuristicId;
@@ -37,13 +41,13 @@ public class SearchGreedy extends SearchBase {
 		}
 
 		_open.add(currentNode);
-		currentNode.setIsProcessed(true);
+		currentNode.setHasBeenProcessed(true);
 
 		while (!_open.isEmpty()) {
 			System.out.println("X After step: " + i);
 
 			currentNode = (Node) _open.remove();
-			currentNode.setIsVisitedAttribute(true);
+			currentNode.setHasBeenVisited(true);
 			_closed.add(currentNode);
 
 			System.out.println("i 'Closed' array contains:");
@@ -59,8 +63,8 @@ public class SearchGreedy extends SearchBase {
 			} else {
 				for (Vertex v : currentNode.getConnectedVertices()) {
 					if (v.getFirstEndId() == currentNode.getId()) {
-						if (!_nodes.get(v.getOtherEndId() - 1).getIsProcessed()
-								&& !_nodes.get(v.getOtherEndId() - 1).getIsVisitedAttribute()) {
+						if (!_nodes.get(v.getOtherEndId() - 1).getHasBeenProcessed()
+								&& !_nodes.get(v.getOtherEndId() - 1).getHasBeenVisited()) {
 							_nodes.get(v.getOtherEndId() - 1).setParentNode(currentNode);
 							// _nodes.get(v.getOtherEndId() -
 							// 1).setDistance(currentNode.getDistance() +
@@ -68,11 +72,11 @@ public class SearchGreedy extends SearchBase {
 							_nodes.get(v.getOtherEndId() - 1).setHeuristicDistance(Heuristics.calculate(_destinations,
 									_nodes.get(v.getOtherEndId() - 1), _heuristicId));
 							currentNode.getChildNodes().add(_nodes.get(v.getOtherEndId() - 1));
-							_nodes.get(v.getOtherEndId() - 1).setIsProcessed(true);
+							_nodes.get(v.getOtherEndId() - 1).setHasBeenProcessed(true);
 						}
 					} else {
-						if (!_nodes.get(v.getFirstEndId() - 1).getIsProcessed()
-								&& !_nodes.get(v.getFirstEndId() - 1).getIsVisitedAttribute()) {
+						if (!_nodes.get(v.getFirstEndId() - 1).getHasBeenProcessed()
+								&& !_nodes.get(v.getFirstEndId() - 1).getHasBeenVisited()) {
 							_nodes.get(v.getFirstEndId() - 1).setParentNode(currentNode);
 							// _nodes.get(v.getFirstEndId() -
 							// 1).setDistance(currentNode.getDistance() +
@@ -80,14 +84,14 @@ public class SearchGreedy extends SearchBase {
 							_nodes.get(v.getFirstEndId() - 1).setHeuristicDistance(Heuristics.calculate(_destinations,
 									_nodes.get(v.getFirstEndId() - 1), _heuristicId));
 							currentNode.getChildNodes().add(_nodes.get(v.getFirstEndId() - 1));
-							_nodes.get(v.getFirstEndId() - 1).setIsProcessed(true);
+							_nodes.get(v.getFirstEndId() - 1).setHasBeenProcessed(true);
 						}
 					}
 				}
 				if (!currentNode.getChildNodes().isEmpty()) {
 					Collections.sort(currentNode.getChildNodes(), new ComparatorHeuristic());
 					for (Node n : currentNode.getChildNodes()) {
-						if (n.getIsVisitedAttribute() == false) {
+						if (n.getHasBeenVisited() == false) {
 							_open.add((Node) n);
 							System.out.println("Added to 'Open': " + n.getId() + " (" + n.getHeuristicDistance() + ")");
 						}

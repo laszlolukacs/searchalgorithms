@@ -2,7 +2,7 @@
  * See LICENSE file
  */
 
-package hu.laszlolukacs.searchalgorithms;
+package hu.laszlolukacs.searchalgorithms.models;
 
 // represents a vertex in a search which always bears a predefined cost
 public class Vertex {

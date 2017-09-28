@@ -4,10 +4,20 @@
 
 package hu.laszlolukacs.searchalgorithms;
 
-// the main class, contains the entry point
+import hu.laszlolukacs.searchalgorithms.models.SearchRepository;
+
+/**
+ * The main class which contains the static entry point method.
+ */
 public class Search {
 
-	// entry point
+	/**
+	 * The entry point for the application.
+	 * 
+	 * @param args
+	 *            Array of strings containing the arguments that were passed to
+	 *            the application.
+	 */
 	public static void main(String[] args) {
 
 		String sourceFilePath, destinationFilePath;
@@ -17,7 +27,7 @@ public class Search {
 
 		// howdy
 		System.out.println(
-				"Artifical Intelligence - Search algorithms homework\nCreated by Laszlo Lukacs (ENWBD4), 2011-12 autumn");
+				"Artifical Intelligence - Search algorithms homework\nCreated by Laszlo Lukacs (ENWBD4), 2011 fall semester");
 		System.out.println("Command-line parameters:");
 		// just to check which files have been opened
 		for (String argument : args) {
@@ -50,5 +60,4 @@ public class Search {
 		outputHelper.setResults(repository.getCurrentSearch().getResult());
 		outputHelper.store();
 	}
-
 }

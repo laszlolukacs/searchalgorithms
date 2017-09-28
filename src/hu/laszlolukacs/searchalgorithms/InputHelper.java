@@ -9,6 +9,10 @@ import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
+import hu.laszlolukacs.searchalgorithms.models.Node;
+import hu.laszlolukacs.searchalgorithms.models.SearchRepository;
+import hu.laszlolukacs.searchalgorithms.models.Vertex;
+
 // processes and parses the source text file
 public class InputHelper {
 

@@ -7,6 +7,9 @@ package hu.laszlolukacs.searchalgorithms;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import hu.laszlolukacs.searchalgorithms.models.Node;
+import hu.laszlolukacs.searchalgorithms.models.Vertex;
+
 // TODO: finish implementation
 public abstract class SearchBase {
 
