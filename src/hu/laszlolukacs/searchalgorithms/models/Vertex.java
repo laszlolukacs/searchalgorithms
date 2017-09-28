@@ -4,28 +4,66 @@
 
 package hu.laszlolukacs.searchalgorithms.models;
 
-// represents a vertex in a search which always bears a predefined cost
+/**
+ * Represents a vertex in a graph, which always has a predefined cost.
+ */
 public class Vertex {
 
-	private int _firstEndId, _otherEndId;
-	private int _cost;
+	/**
+	 * The identifier of the first node.
+	 */
+	private int firstNodeId;
 
-	// ctor - requires the two end nodes of the vertex and its cost
-	public Vertex(int firstEndId, int otherEndId, int cost) {
-		this._firstEndId = firstEndId;
-		this._otherEndId = otherEndId;
-		this._cost = cost;
+	/**
+	 * The identifier of the other node.
+	 */
+	private int otherNodeId;
+
+	/**
+	 * The cost of the vertex.
+	 */
+	private int cost;
+
+	/**
+	 * Initializes a new instance of the `Vertex` class.
+	 * 
+	 * @param firstNodeId
+	 *            The identifier of the first node.
+	 * @param otherNodeId
+	 *            The identifier of the other node.
+	 * @param cost
+	 *            The cost of the vertex.
+	 */
+	public Vertex(int firstNodeId, int otherNodeId, int cost) {
+		this.firstNodeId = firstNodeId;
+		this.otherNodeId = otherNodeId;
+		this.cost = cost;
 	}
 
-	public int getFirstEndId() {
-		return _firstEndId;
+	/**
+	 * Gets the identifier of the first node to which this vertex is connected.
+	 * 
+	 * @return The identifier of the first node.
+	 */
+	public int getFirstNodeId() {
+		return firstNodeId;
 	}
 
-	public int getOtherEndId() {
-		return _otherEndId;
+	/**
+	 * Gets the identifier of the other node to which this vertex is connected.
+	 * 
+	 * @return The identifier of the other node.
+	 */
+	public int getOtherNodeId() {
+		return otherNodeId;
 	}
 
+	/**
+	 * Gets the cost of this vertex.
+	 * 
+	 * @return The cost of the vertex.
+	 */
 	public int getCost() {
-		return _cost;
+		return cost;
 	}
 }

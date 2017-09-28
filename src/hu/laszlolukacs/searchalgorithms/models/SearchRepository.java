@@ -53,8 +53,8 @@ public class SearchRepository {
 
 	public void addVertex(Vertex v) {
 		_vertices.add(v);
-		_nodes.get(v.getFirstEndId() - 1).getConnectedVertices().add(v);
-		_nodes.get(v.getOtherEndId() - 1).getConnectedVertices().add(v);
+		_nodes.get(v.getFirstNodeId() - 1).getConnectedVertices().add(v);
+		_nodes.get(v.getOtherNodeId() - 1).getConnectedVertices().add(v);
 	}
 
 	public void setSearch(SearchBase s) {

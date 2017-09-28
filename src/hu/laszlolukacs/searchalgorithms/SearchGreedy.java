@@ -62,29 +62,29 @@ public class SearchGreedy extends SearchBase {
 				return;
 			} else {
 				for (Vertex v : currentNode.getConnectedVertices()) {
-					if (v.getFirstEndId() == currentNode.getId()) {
-						if (!_nodes.get(v.getOtherEndId() - 1).getHasBeenProcessed()
-								&& !_nodes.get(v.getOtherEndId() - 1).getHasBeenVisited()) {
-							_nodes.get(v.getOtherEndId() - 1).setParentNode(currentNode);
+					if (v.getFirstNodeId() == currentNode.getId()) {
+						if (!_nodes.get(v.getOtherNodeId() - 1).getHasBeenProcessed()
+								&& !_nodes.get(v.getOtherNodeId() - 1).getHasBeenVisited()) {
+							_nodes.get(v.getOtherNodeId() - 1).setParentNode(currentNode);
 							// _nodes.get(v.getOtherEndId() -
 							// 1).setDistance(currentNode.getDistance() +
 							// v.getCost());
-							_nodes.get(v.getOtherEndId() - 1).setHeuristicDistance(Heuristics.calculate(_destinations,
-									_nodes.get(v.getOtherEndId() - 1), _heuristicId));
-							currentNode.getChildNodes().add(_nodes.get(v.getOtherEndId() - 1));
-							_nodes.get(v.getOtherEndId() - 1).setHasBeenProcessed(true);
+							_nodes.get(v.getOtherNodeId() - 1).setHeuristicDistance(Heuristics.calculate(_destinations,
+									_nodes.get(v.getOtherNodeId() - 1), _heuristicId));
+							currentNode.getChildNodes().add(_nodes.get(v.getOtherNodeId() - 1));
+							_nodes.get(v.getOtherNodeId() - 1).setHasBeenProcessed(true);
 						}
 					} else {
-						if (!_nodes.get(v.getFirstEndId() - 1).getHasBeenProcessed()
-								&& !_nodes.get(v.getFirstEndId() - 1).getHasBeenVisited()) {
-							_nodes.get(v.getFirstEndId() - 1).setParentNode(currentNode);
+						if (!_nodes.get(v.getFirstNodeId() - 1).getHasBeenProcessed()
+								&& !_nodes.get(v.getFirstNodeId() - 1).getHasBeenVisited()) {
+							_nodes.get(v.getFirstNodeId() - 1).setParentNode(currentNode);
 							// _nodes.get(v.getFirstEndId() -
 							// 1).setDistance(currentNode.getDistance() +
 							// v.getCost());
-							_nodes.get(v.getFirstEndId() - 1).setHeuristicDistance(Heuristics.calculate(_destinations,
-									_nodes.get(v.getFirstEndId() - 1), _heuristicId));
-							currentNode.getChildNodes().add(_nodes.get(v.getFirstEndId() - 1));
-							_nodes.get(v.getFirstEndId() - 1).setHasBeenProcessed(true);
+							_nodes.get(v.getFirstNodeId() - 1).setHeuristicDistance(Heuristics.calculate(_destinations,
+									_nodes.get(v.getFirstNodeId() - 1), _heuristicId));
+							currentNode.getChildNodes().add(_nodes.get(v.getFirstNodeId() - 1));
+							_nodes.get(v.getFirstNodeId() - 1).setHasBeenProcessed(true);
 						}
 					}
 				}
