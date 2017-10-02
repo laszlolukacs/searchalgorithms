@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import hu.laszlolukacs.searchalgorithms.ComparatorById;
-import hu.laszlolukacs.searchalgorithms.SearchBase;
+import hu.laszlolukacs.searchalgorithms.implementations.SearchBase;
 
 /**
  * Represents a graph which consists of a collection of nodes connected by

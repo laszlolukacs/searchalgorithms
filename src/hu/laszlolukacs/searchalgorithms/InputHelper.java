@@ -10,6 +10,11 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
 import hu.laszlolukacs.searchalgorithms.models.Node;
+import hu.laszlolukacs.searchalgorithms.implementations.SearchAStar;
+import hu.laszlolukacs.searchalgorithms.implementations.SearchBreadthFirst;
+import hu.laszlolukacs.searchalgorithms.implementations.SearchDepthFirst;
+import hu.laszlolukacs.searchalgorithms.implementations.SearchGreedy;
+import hu.laszlolukacs.searchalgorithms.implementations.SearchUniformCost;
 import hu.laszlolukacs.searchalgorithms.models.Graph;
 import hu.laszlolukacs.searchalgorithms.models.Vertex;
 

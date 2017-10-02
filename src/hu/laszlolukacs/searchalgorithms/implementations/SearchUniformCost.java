@@ -2,15 +2,16 @@
  * See LICENSE file
  */
 
-package hu.laszlolukacs.searchalgorithms;
+package hu.laszlolukacs.searchalgorithms.implementations;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
+import hu.laszlolukacs.searchalgorithms.ComparatorByDistance;
 import hu.laszlolukacs.searchalgorithms.models.Node;
 import hu.laszlolukacs.searchalgorithms.models.Vertex;
 
-public class SearchUniformCost extends SearchBase {
+public class SearchUniformCost extends SearchBase implements SearchAlgorithm {
 
 	public SearchUniformCost(ArrayList<Vertex> vertices, ArrayList<Node> nodes) {
 		super(vertices, nodes);

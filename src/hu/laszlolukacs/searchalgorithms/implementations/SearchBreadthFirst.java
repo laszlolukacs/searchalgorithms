@@ -2,17 +2,18 @@
  * See LICENSE file
  */
 
-package hu.laszlolukacs.searchalgorithms;
+package hu.laszlolukacs.searchalgorithms.implementations;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
+import hu.laszlolukacs.searchalgorithms.ComparatorById;
 import hu.laszlolukacs.searchalgorithms.models.Node;
 import hu.laszlolukacs.searchalgorithms.models.Vertex;
 
-public class SearchDepthFirst extends SearchBase {
+public class SearchBreadthFirst extends SearchBase implements SearchAlgorithm {
 
-	public SearchDepthFirst(ArrayList<Vertex> vertices, ArrayList<Node> nodes) {
+	public SearchBreadthFirst(ArrayList<Vertex> vertices, ArrayList<Node> nodes) {
 		super(vertices, nodes);
 	}
 
@@ -20,7 +21,7 @@ public class SearchDepthFirst extends SearchBase {
 		int i = 1;
 		Node currentNode = (Node) _nodes.get(_startId - 1);
 
-		System.out.println("*****\nExecuting Depth-first search...\n*****");
+		System.out.println("*****\nExecuting Breadth-first search...\n*****");
 
 		_open.add(currentNode);
 		currentNode.setHasBeenProcessed(true);
@@ -62,10 +63,9 @@ public class SearchDepthFirst extends SearchBase {
 				}
 				if (!currentNode.getChildNodes().isEmpty()) {
 					Collections.sort(currentNode.getChildNodes(), new ComparatorById());
-					Collections.reverse(currentNode.getChildNodes());
 					for (Node n : currentNode.getChildNodes()) {
 						if (n.getHasBeenVisited() == false) {
-							_open.addFirst((Node) n);
+							_open.add(n);
 							System.out.println("Added to 'open': " + n.getId());
 						}
 					}
