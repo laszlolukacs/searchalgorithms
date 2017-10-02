@@ -10,7 +10,7 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
 import hu.laszlolukacs.searchalgorithms.models.Node;
-import hu.laszlolukacs.searchalgorithms.models.SearchRepository;
+import hu.laszlolukacs.searchalgorithms.models.Graph;
 import hu.laszlolukacs.searchalgorithms.models.Vertex;
 
 // processes and parses the source text file
@@ -19,11 +19,11 @@ public class InputHelper {
 	private byte _heuristicId;
 	private int _tempStartingId;
 	private String _inputFilePath;
-	private SearchRepository _repository;
+	private Graph _repository;
 
 	// ctor - requires the source text file's path and an instance of a
 	// repository
-	public InputHelper(String inputFilePath, SearchRepository r) {
+	public InputHelper(String inputFilePath, Graph r) {
 		this._inputFilePath = inputFilePath;
 		this._repository = r;
 	}

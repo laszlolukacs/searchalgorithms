@@ -4,7 +4,7 @@
 
 package hu.laszlolukacs.searchalgorithms;
 
-import hu.laszlolukacs.searchalgorithms.models.SearchRepository;
+import hu.laszlolukacs.searchalgorithms.models.Graph;
 
 /**
  * The main class which contains the static entry point method.
@@ -21,7 +21,7 @@ public class Search {
 	public static void main(String[] args) {
 
 		String sourceFilePath, destinationFilePath;
-		SearchRepository repository;
+		Graph repository;
 		InputHelper inputHelper;
 		OutputHelper outputHelper;
 
@@ -47,7 +47,7 @@ public class Search {
 
 		// instances the repository (the class in which the elements of a search
 		// will be stored)
-		repository = new SearchRepository();
+		repository = new Graph();
 		// instances the input helper (the class which processes and parses the
 		// source text file)
 		inputHelper = new InputHelper(sourceFilePath, repository);
