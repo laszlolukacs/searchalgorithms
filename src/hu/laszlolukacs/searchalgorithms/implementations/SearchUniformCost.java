@@ -11,12 +11,26 @@ import hu.laszlolukacs.searchalgorithms.ComparatorByDistance;
 import hu.laszlolukacs.searchalgorithms.models.Node;
 import hu.laszlolukacs.searchalgorithms.models.Vertex;
 
+/**
+ * Contains the implementation of the Uniform cost search algorithm.
+ */
 public class SearchUniformCost extends SearchBase implements SearchAlgorithm {
 
+	/**
+	 * Initializes a new instance of the `SearchUniformCost` class.
+	 * 
+	 * @param vertices
+	 *            The vertices on which the search algorithm will be executed.
+	 * @param nodes
+	 *            The nodes on which the search algorithm will be executed.
+	 */
 	public SearchUniformCost(ArrayList<Vertex> vertices, ArrayList<Node> nodes) {
 		super(vertices, nodes);
 	}
 
+	/**
+	 * Executes the Uniform cost search algorithm.
+	 */
 	public void execute() {
 		int i = 1;
 		Node currentNode = (Node) _nodes.get(_startId - 1);
@@ -37,6 +51,7 @@ public class SearchUniformCost extends SearchBase implements SearchAlgorithm {
 			for (Node n : _closed) {
 				System.out.print(n.getId() + " (" + n.getDistance() + "), ");
 			}
+			
 			System.out.println();
 
 			if (currentNode.getEndingPointAttribute()) {
@@ -63,6 +78,7 @@ public class SearchUniformCost extends SearchBase implements SearchAlgorithm {
 						}
 					}
 				}
+				
 				if (!currentNode.getChildNodes().isEmpty()) {
 					Collections.sort(currentNode.getChildNodes(), new ComparatorByDistance());
 					for (Node n : currentNode.getChildNodes()) {
@@ -72,14 +88,17 @@ public class SearchUniformCost extends SearchBase implements SearchAlgorithm {
 						}
 					}
 				}
+				
 				Collections.sort(_open, new ComparatorByDistance());
 
 				System.out.println("i 'Open' array contains: ");
 				for (Node n : _open) {
 					System.out.print(n.getId() + " (" + n.getDistance() + "), ");
 				}
+				
 				System.out.println();
 			}
+			
 			i++;
 		}
 	}

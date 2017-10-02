@@ -11,12 +11,26 @@ import hu.laszlolukacs.searchalgorithms.ComparatorById;
 import hu.laszlolukacs.searchalgorithms.models.Node;
 import hu.laszlolukacs.searchalgorithms.models.Vertex;
 
+/**
+ * Contains the implementation of the Breadth-first search (BFS) algorithm.
+ */
 public class SearchBreadthFirst extends SearchBase implements SearchAlgorithm {
 
+	/**
+	 * Initializes a new instance of the `SearchBreadthFirst` class.
+	 * 
+	 * @param vertices
+	 *            The vertices on which the search algorithm will be executed.
+	 * @param nodes
+	 *            The nodes on which the search algorithm will be executed.
+	 */
 	public SearchBreadthFirst(ArrayList<Vertex> vertices, ArrayList<Node> nodes) {
 		super(vertices, nodes);
 	}
 
+	/**
+	 * Executes the Breadth-first search algorithm.
+	 */
 	public void execute() {
 		int i = 1;
 		Node currentNode = (Node) _nodes.get(_startId - 1);
@@ -37,6 +51,7 @@ public class SearchBreadthFirst extends SearchBase implements SearchAlgorithm {
 			for (Node n : _closed) {
 				System.out.print(n.getId() + ", ");
 			}
+
 			System.out.println();
 
 			if (currentNode.getEndingPointAttribute()) {
@@ -61,6 +76,7 @@ public class SearchBreadthFirst extends SearchBase implements SearchAlgorithm {
 						}
 					}
 				}
+				
 				if (!currentNode.getChildNodes().isEmpty()) {
 					Collections.sort(currentNode.getChildNodes(), new ComparatorById());
 					for (Node n : currentNode.getChildNodes()) {
@@ -75,8 +91,10 @@ public class SearchBreadthFirst extends SearchBase implements SearchAlgorithm {
 				for (Node n : _open) {
 					System.out.print(n.getId() + ", ");
 				}
+
 				System.out.println();
 			}
+
 			i++;
 		}
 	}

@@ -12,19 +12,36 @@ import hu.laszlolukacs.searchalgorithms.models.Heuristics;
 import hu.laszlolukacs.searchalgorithms.models.Node;
 import hu.laszlolukacs.searchalgorithms.models.Vertex;
 
+/**
+ * Contains the implementation of the Greedy (best-first) search algorithm.
+ */
 public class SearchGreedy extends SearchBase implements SearchAlgorithm {
 
 	private byte _heuristicId;
 	private ArrayList<Node> _destinations;
 
+	/**
+	 * Initializes a new instance of the `SearchGreedy` class.
+	 * 
+	 * @param vertices
+	 *            The vertices on which the search algorithm will be executed.
+	 * @param nodes
+	 *            The nodes on which the search algorithm will be executed.
+	 * @param destinations
+	 *            The destination nodes
+	 * @param heuristicId
+	 *            The identifier of the heuristic method.
+	 */
 	public SearchGreedy(ArrayList<Vertex> vertices, ArrayList<Node> nodes, ArrayList<Node> destinations,
 			byte heuristicId) {
 		super(vertices, nodes);
-
 		this._heuristicId = heuristicId;
 		this._destinations = destinations;
 	}
 
+	/**
+	 * Executes the Greedy search algorithm.
+	 */
 	public void execute() {
 		int i = 1;
 		Node currentNode = (Node) _nodes.get(_startId - 1);
@@ -55,6 +72,7 @@ public class SearchGreedy extends SearchBase implements SearchAlgorithm {
 			for (Node n : _open) {
 				System.out.print(n.getId() + " (" + n.getHeuristicDistance() + "), ");
 			}
+
 			System.out.println();
 
 			if (currentNode.getEndingPointAttribute()) {
@@ -89,6 +107,7 @@ public class SearchGreedy extends SearchBase implements SearchAlgorithm {
 						}
 					}
 				}
+
 				if (!currentNode.getChildNodes().isEmpty()) {
 					Collections.sort(currentNode.getChildNodes(), new ComparatorHeuristic());
 					for (Node n : currentNode.getChildNodes()) {
@@ -98,14 +117,17 @@ public class SearchGreedy extends SearchBase implements SearchAlgorithm {
 						}
 					}
 				}
+
 				Collections.sort(_open, new ComparatorHeuristic());
 
 				System.out.println("i 'Open' array contains: ");
 				for (Node n : _open) {
 					System.out.print(n.getId() + " (" + n.getHeuristicDistance() + "), ");
 				}
+
 				System.out.println();
 			}
+
 			i++;
 		}
 	}
