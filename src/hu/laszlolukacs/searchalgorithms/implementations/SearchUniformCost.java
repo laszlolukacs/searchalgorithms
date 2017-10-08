@@ -7,9 +7,9 @@ package hu.laszlolukacs.searchalgorithms.implementations;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import hu.laszlolukacs.searchalgorithms.ComparatorByDistance;
 import hu.laszlolukacs.searchalgorithms.models.Node;
 import hu.laszlolukacs.searchalgorithms.models.Vertex;
+import hu.laszlolukacs.searchalgorithms.models.comparators.ComparatorByDistance;
 
 /**
  * Contains the implementation of the Uniform cost search algorithm.

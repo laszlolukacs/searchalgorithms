@@ -2,12 +2,16 @@
  * See LICENSE file
  */
 
-package hu.laszlolukacs.searchalgorithms;
+package hu.laszlolukacs.searchalgorithms.models.comparators;
 
 import java.util.Comparator;
 
 import hu.laszlolukacs.searchalgorithms.models.Node;
 
+/**
+ * Contains an implementation of the Node Comparator interface, which performs
+ * the comparison by the distances of the nodes.
+ */
 public class ComparatorByDistance implements Comparator<Node> {
 
 	public int compare(Node n1, Node n2) {

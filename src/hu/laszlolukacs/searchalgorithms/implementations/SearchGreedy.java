@@ -7,10 +7,10 @@ package hu.laszlolukacs.searchalgorithms.implementations;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import hu.laszlolukacs.searchalgorithms.ComparatorHeuristic;
 import hu.laszlolukacs.searchalgorithms.models.Heuristics;
 import hu.laszlolukacs.searchalgorithms.models.Node;
 import hu.laszlolukacs.searchalgorithms.models.Vertex;
+import hu.laszlolukacs.searchalgorithms.models.comparators.ComparatorHeuristic;
 
 /**
  * Contains the implementation of the Greedy (best-first) search algorithm.

@@ -7,8 +7,8 @@ package hu.laszlolukacs.searchalgorithms.models;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import hu.laszlolukacs.searchalgorithms.ComparatorById;
 import hu.laszlolukacs.searchalgorithms.implementations.SearchBase;
+import hu.laszlolukacs.searchalgorithms.models.comparators.ComparatorById;
 
 /**
  * Represents a graph which consists of a collection of nodes connected by

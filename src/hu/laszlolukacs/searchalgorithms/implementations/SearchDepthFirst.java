@@ -7,9 +7,9 @@ package hu.laszlolukacs.searchalgorithms.implementations;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import hu.laszlolukacs.searchalgorithms.ComparatorById;
 import hu.laszlolukacs.searchalgorithms.models.Node;
 import hu.laszlolukacs.searchalgorithms.models.Vertex;
+import hu.laszlolukacs.searchalgorithms.models.comparators.ComparatorById;
 
 /**
  * Contains the implementation of the Depth-first search (DFS) algorithm.
