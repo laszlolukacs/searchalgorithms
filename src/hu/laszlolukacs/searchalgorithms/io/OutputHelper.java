@@ -2,27 +2,44 @@
  * See LICENSE file
  */
 
-package hu.laszlolukacs.searchalgorithms;
+package hu.laszlolukacs.searchalgorithms.io;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.LinkedList;
 
+/**
+ * Contains the methods and logic to emit the results to a text file.
+ */
 public class OutputHelper {
 
 	private String _outputFilePath;
 	private LinkedList<Integer> _results;
 
+	/**
+	 * Initializes a new instance of the `OutputHelper` class.
+	 * 
+	 * @param outputFilePath
+	 *            The path of the output file.
+	 */
 	public OutputHelper(String outputFilePath) {
 		this._outputFilePath = outputFilePath;
 		this._results = new LinkedList<Integer>();
 	}
 
+	/**
+	 * Sets the result set to be printed out to a text file.
+	 * 
+	 * @param results
+	 */
 	public void setResults(LinkedList<Integer> results) {
 		this._results = results;
 	}
 
+	/**
+	 * Stores the current result set to a text file.
+	 */
 	public void store() {
 		try {
 			File outputFile = new File(_outputFilePath);

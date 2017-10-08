@@ -4,6 +4,8 @@
 
 package hu.laszlolukacs.searchalgorithms;
 
+import hu.laszlolukacs.searchalgorithms.io.InputHelper;
+import hu.laszlolukacs.searchalgorithms.io.OutputHelper;
 import hu.laszlolukacs.searchalgorithms.models.Graph;
 
 /**

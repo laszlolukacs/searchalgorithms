@@ -2,7 +2,7 @@
  * See LICENSE file
  */
 
-package hu.laszlolukacs.searchalgorithms;
+package hu.laszlolukacs.searchalgorithms.io;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -18,7 +18,9 @@ import hu.laszlolukacs.searchalgorithms.implementations.SearchUniformCost;
 import hu.laszlolukacs.searchalgorithms.models.Graph;
 import hu.laszlolukacs.searchalgorithms.models.Vertex;
 
-// processes and parses the source text file
+/**
+ * Contains the methods and logic to parse the task specific input text files.
+ */
 public class InputHelper {
 
 	private byte _heuristicId;
@@ -26,14 +28,22 @@ public class InputHelper {
 	private String _inputFilePath;
 	private Graph _repository;
 
-	// ctor - requires the source text file's path and an instance of a
-	// repository
-	public InputHelper(String inputFilePath, Graph r) {
+	/**
+	 * Initializes a new instance of the `InputHelper` class.
+	 * 
+	 * @param inputFilePath
+	 *            The path of the input file.
+	 * @param graph
+	 *            The graph which will be built based on the input file.
+	 */
+	public InputHelper(String inputFilePath, Graph graph) {
 		this._inputFilePath = inputFilePath;
-		this._repository = r;
+		this._repository = graph;
 	}
 
-	// processes the source text file
+	/**
+	 * Processes the source text file.
+	 */
 	public void process() {
 		try {
 			boolean isNewSectionStarted = false;
