@@ -6,34 +6,41 @@ package hu.laszlolukacs.searchalgorithms.implementations;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 import hu.laszlolukacs.searchalgorithms.models.Node;
-import hu.laszlolukacs.searchalgorithms.models.Vertex;
+import hu.laszlolukacs.searchalgorithms.models.Edge;
+import hu.laszlolukacs.searchalgorithms.models.Graph;
 import hu.laszlolukacs.searchalgorithms.models.comparators.ComparatorById;
 
 /**
  * Contains the implementation of the Breadth-first search (BFS) algorithm.
  */
-public class SearchBreadthFirst extends SearchBase implements SearchAlgorithm {
+public class BreadthFirstSearch extends SearchBase implements SearchAlgorithm {
 
 	/**
-	 * Initializes a new instance of the `SearchBreadthFirst` class.
-	 * 
-	 * @param vertices
-	 *            The vertices on which the search algorithm will be executed.
-	 * @param nodes
-	 *            The nodes on which the search algorithm will be executed.
+	 * Initializes a new instance of the `BreadthFirstSearch` class.
 	 */
-	public SearchBreadthFirst(ArrayList<Vertex> vertices, ArrayList<Node> nodes) {
-		super(vertices, nodes);
+	public BreadthFirstSearch() {
+		super();
 	}
 
 	/**
 	 * Executes the Breadth-first search algorithm.
+	 * 
+	 * @param graph
+	 *            The target graph on which the algorithm will work.
+	 * @param startNodeId
+	 *            The identifier of the starting node.
+	 * @param targetNodeIds
+	 *            The identifier of the target nodes.
+	 * @return A (possibly empty) collection of the search results.
 	 */
-	public void execute() {
+	public List<Integer> execute(final Graph graph, final Integer startNodeId, final List<Integer> targetNodeIds) {
+		List<Node> _nodes = graph.getNodesList();
 		int i = 1;
-		Node currentNode = (Node) _nodes.get(_startId - 1);
+		Node currentNode = (Node) _nodes.get(startNodeId - 1);
 
 		System.out.println("*****\nExecuting Breadth-first search...\n*****");
 
@@ -54,12 +61,20 @@ public class SearchBreadthFirst extends SearchBase implements SearchAlgorithm {
 
 			System.out.println();
 
-			if (currentNode.getEndingPointAttribute()) {
+			boolean found = false;
+			for (Iterator<Integer> iterator = targetNodeIds.iterator(); iterator.hasNext();) {
+				int targetNodeId = (Integer) iterator.next();
+				if(targetNodeId == currentNode.getId()) {
+					found = true;
+				}
+			}
+			
+			if (found) {
 				System.out.println("! Result found: " + currentNode.getId() + " STOPPED.");
-				_results.addLast(currentNode.getId());
-				return;
+				_results.add(currentNode.getId());
+				return _results;
 			} else {
-				for (Vertex v : currentNode.getConnectedVertices()) {
+				for (Edge v : currentNode.getConnectedEdges()) {
 					if (v.getFirstNodeId() == currentNode.getId()) {
 						if (!_nodes.get(v.getOtherNodeId() - 1).getHasBeenProcessed()
 								&& !_nodes.get(v.getOtherNodeId() - 1).getHasBeenVisited()) {
@@ -76,7 +91,7 @@ public class SearchBreadthFirst extends SearchBase implements SearchAlgorithm {
 						}
 					}
 				}
-				
+
 				if (!currentNode.getChildNodes().isEmpty()) {
 					Collections.sort(currentNode.getChildNodes(), new ComparatorById());
 					for (Node n : currentNode.getChildNodes()) {

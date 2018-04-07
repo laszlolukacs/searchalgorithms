@@ -6,36 +6,42 @@ package hu.laszlolukacs.searchalgorithms.implementations;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import hu.laszlolukacs.searchalgorithms.models.Node;
-import hu.laszlolukacs.searchalgorithms.models.Vertex;
-import hu.laszlolukacs.searchalgorithms.models.comparators.ComparatorByDistance;
+import hu.laszlolukacs.searchalgorithms.models.Edge;
+import hu.laszlolukacs.searchalgorithms.models.Graph;
+import hu.laszlolukacs.searchalgorithms.models.comparators.ComparatorById;
 
 /**
- * Contains the implementation of the Uniform cost search algorithm.
+ * Contains the implementation of the Depth-first search (DFS) algorithm.
  */
-public class SearchUniformCost extends SearchBase implements SearchAlgorithm {
+public class DepthFirstSearch extends SearchBase implements SearchAlgorithm {
 
 	/**
-	 * Initializes a new instance of the `SearchUniformCost` class.
-	 * 
-	 * @param vertices
-	 *            The vertices on which the search algorithm will be executed.
-	 * @param nodes
-	 *            The nodes on which the search algorithm will be executed.
+	 * Initializes a new instance of the `DepthFirstSearch` class.
 	 */
-	public SearchUniformCost(ArrayList<Vertex> vertices, ArrayList<Node> nodes) {
-		super(vertices, nodes);
+	public DepthFirstSearch() {
+		super();
 	}
 
 	/**
-	 * Executes the Uniform cost search algorithm.
+	 * Executes the Depth-first search algorithm.
+	 * 
+	 * @param graph
+	 *            The target graph on which the algorithm will work.
+	 * @param startNodeId
+	 *            The identifier of the starting node.
+	 * @param targetNodeIds
+	 *            The identifier of the target nodes.
+	 * @return A (possibly empty) collection of the search results.
 	 */
-	public void execute() {
+	public List<Integer> execute(final Graph graph, final Integer startNodeId, final List<Integer> targetNodeIds) {
+		List<Node> _nodes = graph.getNodesList();
 		int i = 1;
-		Node currentNode = (Node) _nodes.get(_startId - 1);
+		Node currentNode = (Node) _nodes.get(startNodeId - 1);
 
-		System.out.println("*****\nExecuting Uniform cost search...\n*****");
+		System.out.println("*****\nExecuting Depth-first search...\n*****");
 
 		_open.add(currentNode);
 		currentNode.setHasBeenProcessed(true);
@@ -49,9 +55,9 @@ public class SearchUniformCost extends SearchBase implements SearchAlgorithm {
 
 			System.out.println("i 'Closed' array contains:");
 			for (Node n : _closed) {
-				System.out.print(n.getId() + " (" + n.getDistance() + "), ");
+				System.out.print(n.getId() + ", ");
 			}
-			
+
 			System.out.println();
 
 			if (currentNode.getEndingPointAttribute()) {
@@ -59,12 +65,11 @@ public class SearchUniformCost extends SearchBase implements SearchAlgorithm {
 				_results.addLast(currentNode.getId());
 				return;
 			} else {
-				for (Vertex v : currentNode.getConnectedVertices()) {
+				for (Edge v : currentNode.getConnectedEdges()) {
 					if (v.getFirstNodeId() == currentNode.getId()) {
 						if (!_nodes.get(v.getOtherNodeId() - 1).getHasBeenProcessed()
 								&& !_nodes.get(v.getOtherNodeId() - 1).getHasBeenVisited()) {
 							_nodes.get(v.getOtherNodeId() - 1).setParentNode(currentNode);
-							_nodes.get(v.getOtherNodeId() - 1).setDistance(currentNode.getDistance() + v.getCost());
 							currentNode.getChildNodes().add(_nodes.get(v.getOtherNodeId() - 1));
 							_nodes.get(v.getOtherNodeId() - 1).setHasBeenProcessed(true);
 						}
@@ -72,33 +77,31 @@ public class SearchUniformCost extends SearchBase implements SearchAlgorithm {
 						if (!_nodes.get(v.getFirstNodeId() - 1).getHasBeenProcessed()
 								&& !_nodes.get(v.getFirstNodeId() - 1).getHasBeenVisited()) {
 							_nodes.get(v.getFirstNodeId() - 1).setParentNode(currentNode);
-							_nodes.get(v.getFirstNodeId() - 1).setDistance(currentNode.getDistance() + v.getCost());
 							currentNode.getChildNodes().add(_nodes.get(v.getFirstNodeId() - 1));
 							_nodes.get(v.getFirstNodeId() - 1).setHasBeenProcessed(true);
 						}
 					}
 				}
-				
+
 				if (!currentNode.getChildNodes().isEmpty()) {
-					Collections.sort(currentNode.getChildNodes(), new ComparatorByDistance());
+					Collections.sort(currentNode.getChildNodes(), new ComparatorById());
+					Collections.reverse(currentNode.getChildNodes());
 					for (Node n : currentNode.getChildNodes()) {
 						if (n.getHasBeenVisited() == false) {
-							_open.add((Node) n);
-							System.out.println("Added to 'Open': " + n.getId() + " (" + n.getDistance() + ")");
+							_open.addFirst((Node) n);
+							System.out.println("Added to 'open': " + n.getId());
 						}
 					}
 				}
-				
-				Collections.sort(_open, new ComparatorByDistance());
 
 				System.out.println("i 'Open' array contains: ");
 				for (Node n : _open) {
-					System.out.print(n.getId() + " (" + n.getDistance() + "), ");
+					System.out.print(n.getId() + ", ");
 				}
-				
+
 				System.out.println();
 			}
-			
+
 			i++;
 		}
 	}

@@ -1,31 +1,20 @@
 package hu.laszlolukacs.searchalgorithms.implementations;
 
-import java.util.LinkedList;
+import java.util.List;
+
+import hu.laszlolukacs.searchalgorithms.models.Graph;
 
 /**
  * Defines the contracts for a search algorithm implementation.
  */
 public interface SearchAlgorithm {
-
-	/**
-	 * Sets the node with the specified identifier as the starting point of the
-	 * algorithm execution.
-	 * 
-	 * @param nodeId
-	 *            The id of the node which will be designated as the starting
-	 *            point.
-	 */
-	void setStartId(int nodeId);
-
-	/**
-	 * Gets the results of the search algorithm execution as a linked list.
-	 * 
-	 * @return A (possibly empty) collection of the search results.
-	 */
-	LinkedList<Integer> getResult();
-
 	/**
 	 * Executes the current search algorithm.
+	 * 
+	 * @param graph The target graph on which the algorithm will work.
+	 * @param startNodeId The identifier of the starting node.
+	 * @param targetNodeIds The identifier of the target nodes.
+	 * @return A (possibly empty) collection of the search results.
 	 */
-	void execute();
+	List<Integer> execute(final Graph graph, final Integer startNodeId, final List<Integer> targetNodeIds);
 }

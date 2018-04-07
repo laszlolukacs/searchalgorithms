@@ -8,6 +8,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Contains the methods and logic to emit the results to a text file.
@@ -15,7 +16,7 @@ import java.util.LinkedList;
 public class OutputHelper {
 
 	private String _outputFilePath;
-	private LinkedList<Integer> _results;
+	private List<Integer> _results;
 
 	/**
 	 * Initializes a new instance of the `OutputHelper` class.
@@ -33,7 +34,7 @@ public class OutputHelper {
 	 * 
 	 * @param results
 	 */
-	public void setResults(LinkedList<Integer> results) {
+	public void setResults(List<Integer> results) {
 		this._results = results;
 	}
 

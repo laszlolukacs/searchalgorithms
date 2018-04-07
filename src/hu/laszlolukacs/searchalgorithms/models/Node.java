@@ -16,71 +16,59 @@ public class Node {
 	/**
 	 * The unique numerical identifier of the node.
 	 */
-	private int _id;
+	private int id;
 
 	/**
 	 * The optional description label of the node.
 	 */
-	private String _label;
+	private String label;
 
 	/**
 	 * The X coordinate of the node.
 	 */
-	private int _xPos;
+	private int x;
 
 	/**
 	 * The Y coordinate of the node.
 	 */
-	private int _yPos;
-
-	/**
-	 * A value that indicates whether this node is the starting point of a
-	 * directed graph.
-	 */
-	private boolean _isStartingPoint = false;
-
-	/**
-	 * A value that indicates whether this node is the drainage (end) point of a
-	 * directed graph.
-	 */
-	private boolean _isEndingPoint = false;
+	private int y;
 
 	/**
 	 * A value that indicates whether this node has been visited during the
 	 * execution of a search algorithm.
 	 */
-	private boolean _hasBeenVisited = false;
+	private boolean hasBeenVisited = false;
 
 	/**
 	 * A value that indicates whether this node has been processed during the
 	 * execution of a search algorithm.
 	 */
-	private boolean _hasBeenProcessed = false;
+	private boolean hasBeenProcessed = false;
 
 	/**
 	 * Represents the node's distance.
 	 */
-	protected int _distance = 0;
+	private int distance = 0;
 
 	/**
 	 * Represents the node's heuristic distance.
 	 */
-	protected double _heuristicDistance = 0;
+	private double heuristicDistance = 0;
 
 	/**
 	 * References the parent node in the graph.
 	 */
-	protected Node _parentNode;
+	private Node parentNode;
 
 	/**
 	 * A collection of child nodes in the graph.
 	 */
-	protected LinkedList<Node> _childNodes;
+	private LinkedList<Node> childNodes;
 
 	/**
-	 * A collection of vertices which are connected to this node.
+	 * A collection of edges which are connected to this node.
 	 */
-	protected CopyOnWriteArrayList<Vertex> _connectedVertices;
+	private CopyOnWriteArrayList<Edge> connectedEdges;
 
 	/**
 	 * Initializes a new instance of the `Node` class.
@@ -89,20 +77,24 @@ public class Node {
 	 *            The numerical identifier of the node.
 	 * @param label
 	 *            The label of the node.
-	 * @param xPos
+	 * @param x
 	 *            The X coordinate on the graph.
-	 * @param yPos
+	 * @param y
 	 *            The Y coordinate on the graph.
 	 */
-	public Node(int id, String label, int xPos, int yPos) {
-		this._id = id;
-		this._label = label;
-		this._xPos = xPos;
-		this._yPos = yPos;
+	public Node(int id, String label, int x, int y) {
+		this.id = id;
+		this.label = label;
+		this.x = x;
+		this.y = y;
 
-		_parentNode = null;
-		_childNodes = new LinkedList<Node>();
-		_connectedVertices = new CopyOnWriteArrayList<Vertex>();
+		this.parentNode = null;
+		this.childNodes = new LinkedList<Node>();
+		this.connectedEdges = new CopyOnWriteArrayList<Edge>();
+	}
+
+	public static Node fromStrings(String id, String label, String x, String y) throws NumberFormatException {
+		return new Node(Integer.parseInt(id), label, Integer.parseInt(x), Integer.parseInt(y));
 	}
 
 	/**
@@ -111,7 +103,7 @@ public class Node {
 	 * @return The numerical identifier of the node.
 	 */
 	public int getId() {
-		return _id;
+		return this.id;
 	}
 
 	/**
@@ -120,7 +112,7 @@ public class Node {
 	 * @return The description of the node.
 	 */
 	public String getLabel() {
-		return _label;
+		return this.label;
 	}
 
 	/**
@@ -129,7 +121,7 @@ public class Node {
 	 * @return The X coordinate of the node.
 	 */
 	public int getX() {
-		return _xPos;
+		return this.x;
 	}
 
 	/**
@@ -138,27 +130,7 @@ public class Node {
 	 * @return The Y coordinate of the node.
 	 */
 	public int getY() {
-		return _yPos;
-	}
-
-	/**
-	 * Gets a value that indicates whether this node is the starting point of a
-	 * directed graph.
-	 * 
-	 * @return True if this node is the starting node, otherwise false.
-	 */
-	public boolean getStartingPointAttribute() {
-		return _isStartingPoint;
-	}
-
-	/**
-	 * Gets a value that indicates whether this node is the drainage (end) point
-	 * of a directed graph.
-	 * 
-	 * @return True, if this node is the end node, otherwise false.
-	 */
-	public boolean getEndingPointAttribute() {
-		return _isEndingPoint;
+		return this.y;
 	}
 
 	/**
@@ -168,7 +140,7 @@ public class Node {
 	 * @return True, if this node has been visited, otherwise false.
 	 */
 	public boolean getHasBeenVisited() {
-		return _hasBeenVisited;
+		return this.hasBeenVisited;
 	}
 
 	/**
@@ -178,7 +150,7 @@ public class Node {
 	 * @return True, if this node has been processed, otherwise false.
 	 */
 	public boolean getHasBeenProcessed() {
-		return _hasBeenProcessed;
+		return this.hasBeenProcessed;
 	}
 
 	/**
@@ -187,7 +159,7 @@ public class Node {
 	 * @return The distance of the node.
 	 */
 	public int getDistance() {
-		return _distance;
+		return this.distance;
 	}
 
 	/**
@@ -196,7 +168,7 @@ public class Node {
 	 * @return The heuristic distance of the node.
 	 */
 	public double getHeuristicDistance() {
-		return _heuristicDistance;
+		return this.heuristicDistance;
 	}
 
 	/**
@@ -205,7 +177,7 @@ public class Node {
 	 * @return The (possibly null) parent node of the current instance.
 	 */
 	public Node getParentNode() {
-		return _parentNode;
+		return this.parentNode;
 	}
 
 	/**
@@ -214,37 +186,16 @@ public class Node {
 	 * @return A (possibly empty) collection of the child nodes.
 	 */
 	public List<Node> getChildNodes() {
-		return _childNodes;
+		return this.childNodes;
 	}
 
 	/**
-	 * Gets the vertices which are connected to the current instance.
+	 * Gets the edges which are connected to the current instance.
 	 * 
-	 * @return A (possibly empty) collection of the connected vertices.
+	 * @return A (possibly empty) collection of the connected edges.
 	 */
-	public List<Vertex> getConnectedVertices() {
-		return _connectedVertices;
-	}
-
-	/**
-	 * Sets whether this node is the starting point of a directed graph.
-	 * 
-	 * @param isStartingPoint
-	 *            A value that indicates whether this node is the starting
-	 *            point.
-	 */
-	public void setStartingPointAttribute(boolean isStartingPoint) {
-		this._isStartingPoint = isStartingPoint;
-	}
-
-	/**
-	 * Sets whether this node is the ending point of a directed graph.
-	 * 
-	 * @param isEndingPoint
-	 *            A value that indicates whether this node is the ending point.
-	 */
-	public void setEndingPointAttribute(boolean isEndingPoint) {
-		this._isEndingPoint = isEndingPoint;
+	public List<Edge> getConnectedEdges() {
+		return this.connectedEdges;
 	}
 
 	/**
@@ -254,7 +205,7 @@ public class Node {
 	 *            A value that indicates whether this node has been visited.
 	 */
 	public void setHasBeenVisited(boolean hasBeenVisited) {
-		this._hasBeenVisited = hasBeenVisited;
+		this.hasBeenVisited = hasBeenVisited;
 	}
 
 	/**
@@ -264,7 +215,7 @@ public class Node {
 	 *            A value that indicates whether this node has been processed.
 	 */
 	public void setHasBeenProcessed(boolean hasBeenProcessed) {
-		this._hasBeenProcessed = hasBeenProcessed;
+		this.hasBeenProcessed = hasBeenProcessed;
 	}
 
 	/**
@@ -274,8 +225,8 @@ public class Node {
 	 *            The distance of the node.
 	 */
 	public void setDistance(int distance) {
-		if (!_hasBeenProcessed) {
-			this._distance = distance;
+		if (!hasBeenProcessed) {
+			this.distance = distance;
 		}
 	}
 
@@ -286,8 +237,8 @@ public class Node {
 	 *            The heuristic distance of the node.
 	 */
 	public void setHeuristicDistance(double distance) {
-		if (!_hasBeenProcessed) {
-			this._heuristicDistance = distance;
+		if (!hasBeenProcessed) {
+			this.heuristicDistance = distance;
 		}
 	}
 
@@ -298,8 +249,8 @@ public class Node {
 	 *            The parent node.
 	 */
 	public void setParentNode(Node parentNode) {
-		if (!_hasBeenProcessed) {
-			this._parentNode = (Node) parentNode;
+		if (!hasBeenProcessed) {
+			this.parentNode = (Node) parentNode;
 		}
 	}
 
@@ -315,9 +266,9 @@ public class Node {
 	 *         compared.
 	 */
 	public int compareTo(Node other) {
-		if (this._id < other.getId()) {
+		if (this.id < other.getId()) {
 			return -1;
-		} else if (this._id == other.getId()) {
+		} else if (this.id == other.getId()) {
 			return 0;
 		} else {
 			return 1;

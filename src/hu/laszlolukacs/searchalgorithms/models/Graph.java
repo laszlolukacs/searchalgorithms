@@ -7,7 +7,6 @@ package hu.laszlolukacs.searchalgorithms.models;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import hu.laszlolukacs.searchalgorithms.implementations.SearchBase;
 import hu.laszlolukacs.searchalgorithms.models.comparators.ComparatorById;
 
 /**
@@ -22,25 +21,16 @@ public class Graph {
 	private ArrayList<Node> nodes;
 
 	/**
-	 * The collection of destination nodes.
+	 * The collection of the edges between the nodes.
 	 */
-	private ArrayList<Node> destinations;
-
-	/**
-	 * The collection of the vertices between the nodes.
-	 */
-	private ArrayList<Vertex> vertices;
-
-	private SearchBase _currentSearch;
-
+	private ArrayList<Edge> edges;
+	
 	/**
 	 * Initializes a new instance of the `Graph` class.
 	 */
 	public Graph() {
 		this.nodes = new ArrayList<Node>();
-		this.destinations = new ArrayList<Node>();
-		this.vertices = new ArrayList<Vertex>();
-		this._currentSearch = null;
+		this.edges = new ArrayList<Edge>();
 	}
 
 	/**
@@ -53,25 +43,12 @@ public class Graph {
 	}
 
 	/**
-	 * Gets the (possibly empty) collection of destination nodes of the graph.
-	 * 
-	 * @return
-	 */
-	public ArrayList<Node> getDestinationsList() {
-		return destinations;
-	}
-
-	/**
 	 * Gets the (possibly empty) collection of vertices of the graph.
 	 * 
 	 * @return
 	 */
-	public ArrayList<Vertex> getVerticesList() {
-		return vertices;
-	}
-
-	public SearchBase getCurrentSearch() {
-		return _currentSearch;
+	public ArrayList<Edge> getVerticesList() {
+		return edges;
 	}
 
 	/**
@@ -83,33 +60,19 @@ public class Graph {
 	 *            The index of the node in the graph.
 	 */
 	public void addNode(Node node, int index) {
-		nodes.add(index, node);
+		this.nodes.add(index, node);
 	}
 
 	/**
-	 * Adds a destination node to the graph.
+	 * Adds an edge to the graph.
 	 * 
-	 * @param node
-	 *            The node to be added as a destination.
+	 * @param edge
+	 *            The edge to be added.
 	 */
-	public void addDestination(Node node) {
-		destinations.add(node);
-	}
-
-	/**
-	 * Adds a vertex to the graph.
-	 * 
-	 * @param vertex
-	 *            The vertex to be added.
-	 */
-	public void addVertex(Vertex vertex) {
-		vertices.add(vertex);
-		nodes.get(vertex.getFirstNodeId() - 1).getConnectedVertices().add(vertex);
-		nodes.get(vertex.getOtherNodeId() - 1).getConnectedVertices().add(vertex);
-	}
-
-	public void setSearch(SearchBase s) {
-		_currentSearch = s;
+	public void addEdge(Edge edge) {
+		edges.add(edge);
+		nodes.get(edge.getFirstNodeId() - 1).getConnectedEdges().add(edge);
+		nodes.get(edge.getOtherNodeId() - 1).getConnectedEdges().add(edge);
 	}
 
 	/**
@@ -117,17 +80,5 @@ public class Graph {
 	 */
 	public void sortNodes() {
 		Collections.sort(this.nodes, new ComparatorById());
-	}
-
-	/**
-	 * Sets the node with the specified identifier as the starting point of the
-	 * graph.
-	 * 
-	 * @param nodeId
-	 *            The id of the node which will be designated as the starting
-	 *            point.
-	 */
-	public void setStartingId(int nodeId) {
-		_currentSearch.setStartId(nodeId);
 	}
 }
