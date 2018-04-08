@@ -4,14 +4,13 @@
 
 package hu.laszlolukacs.searchalgorithms.implementations;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import hu.laszlolukacs.searchalgorithms.models.Heuristics;
 import hu.laszlolukacs.searchalgorithms.models.Node;
 import hu.laszlolukacs.searchalgorithms.models.Edge;
-import hu.laszlolukacs.searchalgorithms.models.Graph;
+import hu.laszlolukacs.searchalgorithms.models.SymmetricDirectedGraph;
 import hu.laszlolukacs.searchalgorithms.models.comparators.ComparatorHeuristic;
 
 /**
@@ -51,7 +50,7 @@ public class GreedySearch extends SearchBase implements SearchAlgorithm {
 	 *            The identifier of the target nodes.
 	 * @return A (possibly empty) collection of the search results.
 	 */
-	public List<Integer> execute(final Graph graph, final Integer startNodeId, final List<Integer> targetNodeIds) {
+	public List<Integer> execute(final SymmetricDirectedGraph graph, final Integer startNodeId, final List<Integer> targetNodeIds) {
 		List<Node> _nodes = graph.getNodesList();
 		int i = 1;
 		Node currentNode = (Node) _nodes.get(startNodeId - 1);

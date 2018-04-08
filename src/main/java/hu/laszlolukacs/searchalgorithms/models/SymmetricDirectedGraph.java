@@ -15,7 +15,7 @@ import hu.laszlolukacs.searchalgorithms.models.comparators.ComparatorById;
  * Represents a graph which consists of a collection of nodes connected by
  * vertices.
  */
-public class Graph {
+public class SymmetricDirectedGraph {
 
 	/**
 	 * The collection of the graph nodes.
@@ -28,9 +28,9 @@ public class Graph {
 	private ArrayList<Edge> edges;
 	
 	/**
-	 * Initializes a new instance of the `Graph` class.
+	 * Initializes a new instance of the `SymmetricDirectedGraph` class.
 	 */
-	public Graph() {
+	public SymmetricDirectedGraph() {
 		this.nodes = new HashMap<Integer, Node>();
 		this.edges = new ArrayList<Edge>();
 	}

@@ -9,7 +9,6 @@ import hu.laszlolukacs.searchalgorithms.io.SearchInputParser;
 import java.util.List;
 
 import hu.laszlolukacs.searchalgorithms.io.OutputHelper;
-import hu.laszlolukacs.searchalgorithms.models.Graph;
 
 /**
  * The main class of the application which contains the static entry point method.

@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hu.laszlolukacs.searchalgorithms.implementations.SearchAlgorithm;
-import hu.laszlolukacs.searchalgorithms.models.Graph;
+import hu.laszlolukacs.searchalgorithms.models.SymmetricDirectedGraph;
 
 public class SearchContext {
 
 	private SearchAlgorithm searchAlgorithm = null;
-	private Graph graph = null;
+	private SymmetricDirectedGraph graph = null;
 	private int startNodeId = -1;
 	private List<Integer> objectiveNodeIds = new ArrayList<Integer>();
 	
@@ -21,7 +21,7 @@ public class SearchContext {
 		this.searchAlgorithm = searchAlgorithm;
 	}
 
-	public void setGraph(final Graph graph) {
+	public void setGraph(final SymmetricDirectedGraph graph) {
 		this.graph = graph;
 	}
 

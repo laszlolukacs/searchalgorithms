@@ -10,7 +10,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.security.InvalidParameterException;
 
 import hu.laszlolukacs.searchalgorithms.SearchContext;
@@ -21,7 +20,7 @@ import hu.laszlolukacs.searchalgorithms.implementations.GreedySearch;
 import hu.laszlolukacs.searchalgorithms.implementations.SearchAlgorithm;
 import hu.laszlolukacs.searchalgorithms.implementations.UniformCostSearch;
 import hu.laszlolukacs.searchalgorithms.models.Edge;
-import hu.laszlolukacs.searchalgorithms.models.Graph;
+import hu.laszlolukacs.searchalgorithms.models.SymmetricDirectedGraph;
 import hu.laszlolukacs.searchalgorithms.models.Node;
 
 /**
@@ -34,7 +33,7 @@ public class SearchInputParser {
 	private boolean newSection = false;
 	private int currentSectionId = 0;
 
-	private Graph graph = new Graph();
+	private SymmetricDirectedGraph graph = new SymmetricDirectedGraph();
 	private SearchContext context = new SearchContext();
 	private int heuristicId = -1;
 
