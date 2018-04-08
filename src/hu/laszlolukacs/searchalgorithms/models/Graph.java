@@ -6,6 +6,8 @@ package hu.laszlolukacs.searchalgorithms.models;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import hu.laszlolukacs.searchalgorithms.models.comparators.ComparatorById;
 
@@ -18,7 +20,7 @@ public class Graph {
 	/**
 	 * The collection of the graph nodes.
 	 */
-	private ArrayList<Node> nodes;
+	private Map<Integer, Node> nodes;
 
 	/**
 	 * The collection of the edges between the nodes.
@@ -29,7 +31,7 @@ public class Graph {
 	 * Initializes a new instance of the `Graph` class.
 	 */
 	public Graph() {
-		this.nodes = new ArrayList<Node>();
+		this.nodes = new HashMap<Integer, Node>();
 		this.edges = new ArrayList<Edge>();
 	}
 
@@ -38,8 +40,8 @@ public class Graph {
 	 * 
 	 * @return
 	 */
-	public ArrayList<Node> getNodesList() {
-		return nodes;
+	public Map<Integer, Node> getNodes() {
+		return this.nodes;
 	}
 
 	/**
@@ -60,7 +62,7 @@ public class Graph {
 	 *            The index of the node in the graph.
 	 */
 	public void addNode(Node node, int index) {
-		this.nodes.add(index, node);
+		this.nodes.put(index, node);
 	}
 
 	/**
@@ -73,12 +75,5 @@ public class Graph {
 		edges.add(edge);
 		nodes.get(edge.getFirstNodeId() - 1).getConnectedEdges().add(edge);
 		nodes.get(edge.getOtherNodeId() - 1).getConnectedEdges().add(edge);
-	}
-
-	/**
-	 * Sorts the nodes of the graph by their identifiers.
-	 */
-	public void sortNodes() {
-		Collections.sort(this.nodes, new ComparatorById());
 	}
 }

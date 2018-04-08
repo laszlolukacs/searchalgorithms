@@ -43,7 +43,6 @@ public class SearchInputParser {
 			BufferedReader reader = this.openInputFile(inputFilePath);
 			this.processInputFileContents(reader);
 
-			this.graph.sortNodes();
 			this.context.setGraph(graph);
 
 			this.inputStream.close();
