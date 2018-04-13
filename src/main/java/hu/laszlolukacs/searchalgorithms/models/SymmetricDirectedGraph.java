@@ -10,7 +10,7 @@ import java.util.*;
 import hu.laszlolukacs.searchalgorithms.models.comparators.ComparatorById;
 
 /**
- * Represents a graph which consists of a collection of nodes connected by
+ * Represents a symmetric, directed graph which consists of a collection of nodes connected by
  * vertices.
  */
 public class SymmetricDirectedGraph implements Graph {
@@ -63,6 +63,10 @@ public class SymmetricDirectedGraph implements Graph {
 
     @Override
     public boolean areNodesAdjacent(Node node1, Node node2) {
+    	if( node1.getChildNodes().contains(node2) || node2.getChildNodes().contains(node1)) {
+    		return true;
+    	}
+    	
         return false;
     }
 
