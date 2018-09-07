@@ -4,10 +4,10 @@
 
 package hu.laszlolukacs.searchalgorithms.models;
 
-import java.security.KeyException;
-import java.util.*;
-
-import hu.laszlolukacs.searchalgorithms.models.comparators.ComparatorById;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Represents a symmetric, directed graph which consists of a collection of nodes connected by
@@ -34,21 +34,71 @@ public class SymmetricDirectedGraph implements Graph {
     }
 
     /**
-     * Gets the (possibly empty) collection of nodes of the graph.
+     * Gets the (possibly empty) collection of the nodes of the graph.
      *
-     * @return
+     * @return The collection of the nodes of the graph.
      */
     public Map<Integer, Node> getNodes() {
         return this.nodes;
     }
 
     /**
-     * Gets the (possibly empty) collection of vertices of the graph.
+     * Gets the (possibly empty) collection of edges of the graph.
      *
-     * @return
+     * @return The collection of the edges of the graph.
      */
-    public ArrayList<Edge> getVerticesList() {
-        return edges;
+    public ArrayList<Edge> getEdgeList() {
+        return this.edges;
+    }
+
+    /**
+     * Tests whether there is an edge from the node 1 to the node 2.
+     *
+     * @param node1 The first node.
+     * @param node2 The second node.
+     * @return True, if there is an edge from node 1 to node 2, otherwise false.
+     */
+    @Override
+    public boolean areNodesAdjacent(Node node1, Node node2) throws NullPointerException {
+        for (Edge edge : this.edges) {
+            if ((edge.getFirstNodeId() == node1.getId() && edge.getOtherNodeId() == node2.getId())
+                    || (edge.getFirstNodeId() == node2.getId() && edge.getOtherNodeId() == node1.getId())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Lists all nodes such that there is an edge from the specified node to the
+     * returned nodes.
+     *
+     * @param node The origin node.
+     * @return The nodes which are connected to the origin node.
+     */
+    @Override
+    public List<Node> getNeighborNodes(Node node) throws NullPointerException {
+        List<Node> neighborNodes = new ArrayList<Node>();
+        for (Edge edge : node.getConnectedEdges()) {
+            if (edge.getFirstNodeId() == node.getId()) {
+                neighborNodes.add(edge.getOtherNode());
+            } else {
+                neighborNodes.add(edge.getFirstNode());
+            }
+        }
+
+        return neighborNodes;
+    }
+
+    /**
+     * Adds the specified node to the graph.
+     *
+     * @param node The node to be added.
+     */
+    @Override
+    public void addNode(Node node) {
+        this.nodes.put(node.getId(), node);
     }
 
     /**
@@ -61,37 +111,18 @@ public class SymmetricDirectedGraph implements Graph {
         this.nodes.put(index, node);
     }
 
-    @Override
-    public boolean areNodesAdjacent(Node node1, Node node2) {
-    	if( node1.getChildNodes().contains(node2) || node2.getChildNodes().contains(node1)) {
-    		return true;
-    	}
-    	
-        return false;
-    }
-
-    @Override
-    public List<Node> getNeighborNodes(Node node) {
-        return node.getChildNodes();
-    }
-
     /**
-     * Adds the specified node to the graph.
-     *
-     * @param node  The node to be added.
-     */
-    @Override
-    public void addNode(Node node) {
-        this.nodes.put(node.getId(), node);
-    }
-
-    /**
-     * Removes the specified node from the graph.
+     * Removes the specified node (and any edges connected to it) from the graph.
      *
      * @param node The node to be removed.
      */
     @Override
-    public void removeNode(Node node) {
+    public void removeNode(Node node) throws NullPointerException {
+        // removes all the connected edges as well
+        for (Edge edge : new ArrayList<Edge>(node.getConnectedEdges())) {
+            this.removeEdge(edge);
+        }
+
         this.nodes.remove(node.getId());
     }
 
@@ -101,12 +132,17 @@ public class SymmetricDirectedGraph implements Graph {
      * @param edge The edge to be added.
      */
     @Override
-    public void addEdge(Edge edge) {
+    public void addEdge(Edge edge) throws NullPointerException {
         if (!this.nodes.containsKey(edge.getFirstNodeId())) {
             throw new NullPointerException("The first node referenced by this edge is not found in the current graph.");
         }
-        if (this.nodes.containsKey(edge.getOtherNodeId())) {
+        if (!this.nodes.containsKey(edge.getOtherNodeId())) {
             throw new NullPointerException("The second node referenced by this edge is not found in the current graph.");
+        }
+
+        if (edge.getFirstNode() == null || edge.getOtherNode() == null) {
+            Edge edgeToBeAdded = new Edge(this.nodes.get(edge.getFirstNodeId()), this.nodes.get(edge.getOtherNodeId()), edge.getCost());
+            edge = edgeToBeAdded;
         }
 
         edges.add(edge);
@@ -120,7 +156,9 @@ public class SymmetricDirectedGraph implements Graph {
      * @param edge The edge to be removed.
      */
     @Override
-    public void removeEdge(Edge edge) {
+    public void removeEdge(Edge edge) throws NullPointerException {
         this.edges.remove(edge);
+        nodes.get(edge.getFirstNodeId()).getConnectedEdges().remove(edge);
+        nodes.get(edge.getOtherNodeId()).getConnectedEdges().remove(edge);
     }
 }
