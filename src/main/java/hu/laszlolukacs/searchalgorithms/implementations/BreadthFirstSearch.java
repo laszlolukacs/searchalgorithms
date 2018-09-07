@@ -45,8 +45,8 @@ public class BreadthFirstSearch extends SearchBase implements SearchAlgorithm {
             currentNode = open.remove();
             closed.add(currentNode);
 
-            boolean found = this.checkIfNodeIsTarget(currentNode);
-            if (found) {
+            boolean targetFound = this.checkIfNodeIsTarget(currentNode);
+            if (targetFound) {
                 // if the first goal has been reached, the algorithm stops
                 results.add(currentNode.getId());
                 return super.backtrackResultNode(currentNode);
@@ -60,7 +60,7 @@ public class BreadthFirstSearch extends SearchBase implements SearchAlgorithm {
             }
         }
 
-        return targetNodeIds;
+        return results;
     }
 
     /**

@@ -1,6 +1,7 @@
 /**
  * See LICENSE file
  */
+
 package hu.laszlolukacs.searchalgorithms.models;
 
 import org.junit.Before;
@@ -18,13 +19,6 @@ import static org.junit.Assert.*;
 public class SymmetricDirectedGraphTest {
 
     private Graph graphUnderTest = new SymmetricDirectedGraph();
-
-    /**
-     * Sets up once, when the test class is being instantiated.
-     */
-    @BeforeClass
-    public static void setUpOnce() {
-    }
 
     /**
      * Sets up before each test fixture.
