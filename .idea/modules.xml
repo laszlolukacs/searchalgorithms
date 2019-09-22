@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SearchAlgorithms.iml" filepath="$PROJECT_DIR$/SearchAlgorithms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/searchalgorithms.iml" filepath="$PROJECT_DIR$/.idea/modules/searchalgorithms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/searchalgorithms.main.iml" filepath="$PROJECT_DIR$/.idea/modules/searchalgorithms.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/searchalgorithms.test.iml" filepath="$PROJECT_DIR$/.idea/modules/searchalgorithms.test.iml" />
     </modules>
   </component>
 </project>
