@@ -15,56 +15,55 @@ import java.util.List;
  */
 public class OutputHelper {
 
-	private String _outputFilePath;
-	private List<Integer> _results;
+    private String _outputFilePath;
+    private List<Integer> _results;
 
-	/**
-	 * Initializes a new instance of the `OutputHelper` class.
-	 * 
-	 * @param outputFilePath
-	 *            The path of the output file.
-	 */
-	public OutputHelper(String outputFilePath) {
-		this._outputFilePath = outputFilePath;
-		this._results = new LinkedList<Integer>();
-	}
+    /**
+     * Initializes a new instance of the `OutputHelper` class.
+     *
+     * @param outputFilePath The path of the output file.
+     */
+    public OutputHelper(String outputFilePath) {
+        this._outputFilePath = outputFilePath;
+        this._results = new LinkedList<Integer>();
+    }
 
-	/**
-	 * Sets the result set to be printed out to a text file.
-	 * 
-	 * @param results
-	 */
-	public void setResults(List<Integer> results) {
-		this._results = results;
-	}
+    /**
+     * Sets the result set to be printed out to a text file.
+     *
+     * @param results
+     */
+    public void setResults(List<Integer> results) {
+        this._results = results;
+    }
 
-	/**
-	 * Stores the current result set to a text file.
-	 */
-	public void store() {
-		try {
-			File outputFile = new File(_outputFilePath);
-			FileWriter fwr = new FileWriter(outputFile, false);
-			BufferedWriter bw = new BufferedWriter(fwr);
-			bw.flush();
+    /**
+     * Stores the current result set to a text file.
+     */
+    public void store() {
+        try {
+            File outputFile = new File(_outputFilePath);
+            FileWriter fwr = new FileWriter(outputFile, false);
+            BufferedWriter bw = new BufferedWriter(fwr);
+            bw.flush();
 
-			if (!_results.isEmpty()) {
-				for (int i = 0; i < _results.size(); i++) {
-					bw.write(_results.get(i).toString());
-					if (i != _results.size() - 1)
-						bw.newLine();
-				}
+            if (!_results.isEmpty()) {
+                for (int i = 0; i < _results.size(); i++) {
+                    bw.write(_results.get(i).toString());
+                    if (i != _results.size() - 1)
+                        bw.newLine();
+                }
 
-			} else
-				bw.newLine();
+            } else
+                bw.newLine();
 
-			bw.flush();
-			bw.close();
+            bw.flush();
+            bw.close();
 
-		} catch (Exception ex) {
-			System.out.println(
-					"ERROR: Couldn't write output text file. Exception details:\n" + ex.toString() + "\nStack trace: ");
-			ex.printStackTrace();
-		}
-	}
+        } catch (Exception ex) {
+            System.out.println(
+                    "ERROR: Couldn't write output text file. Exception details:\n" + ex.toString() + "\nStack trace: ");
+            ex.printStackTrace();
+        }
+    }
 }
