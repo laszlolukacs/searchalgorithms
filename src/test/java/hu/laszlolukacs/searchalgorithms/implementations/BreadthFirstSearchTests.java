@@ -18,23 +18,17 @@ import static org.junit.Assert.assertArrayEquals;
 /**
  * Contains unit tests for the BreadthFirstSearch implementation.
  */
-public class BreadthFirstSearchTest {
+public class BreadthFirstSearchTests {
 
-    /**
-     * The graph used for the test.
-     */
     private Graph testGraph;
 
-    /**
-     * Prepares the test environment.
-     */
     @Before
     public void setUp() {
-        this.testGraph = TestGraphBuilder.build();
+        this.testGraph = TestGraphBuilder.getBasicTestGraph();
     }
 
     /**
-     * Tests the BFS algorithm on the test graph.
+     * Tests the BFS algorithm on the basic test graph.
      */
     @Test
     public void testExecute() {

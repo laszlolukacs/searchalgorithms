@@ -58,11 +58,6 @@ public class Node {
      * References the parent node in the graph.
      */
     private Node parentNode;
-//
-//    /**
-//     * A collection of child nodes in the graph.
-//     */
-//    private List<Node> childNodes;
 
     /**
      * A collection of edges which are connected to this node.

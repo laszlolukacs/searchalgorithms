@@ -5,7 +5,6 @@
 package hu.laszlolukacs.searchalgorithms.models;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -20,16 +19,13 @@ public class SymmetricDirectedGraphTest {
 
     private Graph graphUnderTest = new SymmetricDirectedGraph();
 
-    /**
-     * Sets up before each test fixture.
-     */
     @Before
     public void setUp() {
         this.graphUnderTest = new SymmetricDirectedGraph();
     }
 
     @Test
-    public void testAreNodesAdjacent() {
+    public void testAdjacent() {
         Node firstNode = new Node(1, "", 1, 1);
         Node secondNode = new Node(2, "", 1, 2);
         Edge edge = new Edge(firstNode, secondNode, 1);
@@ -37,23 +33,23 @@ public class SymmetricDirectedGraphTest {
         this.graphUnderTest.addNode(firstNode);
         this.graphUnderTest.addNode(secondNode);
         this.graphUnderTest.addEdge(edge);
-        boolean adjacency = this.graphUnderTest.areNodesAdjacent(firstNode, secondNode);
+        boolean adjacency = this.graphUnderTest.adjacent(firstNode, secondNode);
         assertTrue(adjacency);
     }
 
     @Test
-    public void testAreNodesNotAdjacent() {
+    public void testAdjacentNotTrue() {
         Node firstNode = new Node(1, "", 1, 1);
         Node otherNode = new Node(2, "", 1, 2);
 
         this.graphUnderTest.addNode(firstNode);
         this.graphUnderTest.addNode(otherNode);
-        boolean adjacency = this.graphUnderTest.areNodesAdjacent(firstNode, otherNode);
+        boolean adjacency = this.graphUnderTest.adjacent(firstNode, otherNode);
         assertFalse(adjacency);
     }
 
     @Test
-    public void getNeighborNodes() {
+    public void testNeighbors() {
         Node firstNode = new Node(1, "", 1, 1);
         Node otherNode1 = new Node(2, "", 1, 2);
         Node otherNode2 = new Node(3, "", 2, 1);
@@ -68,7 +64,7 @@ public class SymmetricDirectedGraphTest {
             this.graphUnderTest.addEdge(edge);
         }
 
-        List<Node> neighboringNodes = this.graphUnderTest.getNeighborNodes(firstNode);
+        List<Node> neighboringNodes = this.graphUnderTest.neighbors(firstNode);
         assertArrayEquals(neighborNodes.toArray(), neighboringNodes.toArray());
     }
 
@@ -81,7 +77,7 @@ public class SymmetricDirectedGraphTest {
     }
 
     @Test
-    public void removeNode() {
+    public void testRemoveNode() {
         Node nodeToBeAdded = new Node(1, "", 1, 1);
         this.graphUnderTest.addNode(nodeToBeAdded);
         this.graphUnderTest.removeNode(nodeToBeAdded);
@@ -90,7 +86,7 @@ public class SymmetricDirectedGraphTest {
     }
 
     @Test
-    public void removeNodeWithEdges() {
+    public void testRemoveNodeWithEdges() {
         Node firstNode = new Node(1, "", 1, 1);
         Node nodeToRemove = new Node(2, "", 1, 2);
         Edge edgeToRemove = new Edge(firstNode, nodeToRemove, 1);
@@ -107,7 +103,7 @@ public class SymmetricDirectedGraphTest {
     }
 
     @Test
-    public void addEdge() {
+    public void testAddEdge() {
         Node firstNode = new Node(1, "", 1, 1);
         Node secondNode = new Node(2, "", 1, 2);
         Edge edge = new Edge(firstNode, secondNode, 1);
@@ -120,7 +116,7 @@ public class SymmetricDirectedGraphTest {
     }
 
     @Test
-    public void removeEdge() {
+    public void testRemoveEdge() {
         Node firstNode = new Node(1, "", 1, 1);
         Node secondNode = new Node(2, "", 1, 2);
         Edge edge = new Edge(firstNode, secondNode, 1);

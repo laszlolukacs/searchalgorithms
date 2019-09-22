@@ -8,6 +8,7 @@ import java.util.List;
  * Defines the contracts for a search algorithm implementation.
  */
 public interface SearchAlgorithm {
+
     /**
      * Executes the current search algorithm.
      *

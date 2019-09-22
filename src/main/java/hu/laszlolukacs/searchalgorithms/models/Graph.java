@@ -10,6 +10,7 @@ import java.util.List;
  * Defines the contracts for graph implementations.
  */
 public interface Graph {
+
     /**
      * Tests whether there is an edge from the node 1 to the node 2.
      *
@@ -17,7 +18,7 @@ public interface Graph {
      * @param node2 The second node.
      * @return True, if there is an edge from node 1 to node 2, otherwise false.
      */
-    boolean areNodesAdjacent(Node node1, Node node2) throws NullPointerException;
+    boolean adjacent(Node node1, Node node2) throws NullPointerException;
 
     /**
      * Lists all nodes such that there is an edge from the specified node to the
@@ -26,7 +27,7 @@ public interface Graph {
      * @param node The origin node.
      * @return The nodes which are connected to the origin node.
      */
-    List<Node> getNeighborNodes(Node node) throws NullPointerException;
+    List<Node> neighbors(Node node) throws NullPointerException;
 
     /**
      * Adds the specified node to the graph, if it is not there already.

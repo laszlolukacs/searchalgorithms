@@ -10,23 +10,18 @@ package hu.laszlolukacs.searchalgorithms.models;
 public class TestGraphBuilder {
 
     /**
-     * Builds the test graph.
+     * Builds the basic, complete test graph.
      *
-     * @return The test graph.
+     * @return A complete basic test graph, containing some nodes and edges between them.
      */
-    public static Graph build() {
+    public static Graph getBasicTestGraph() {
         Graph testGraph = new SymmetricDirectedGraph();
-        TestGraphBuilder.addNodesToTestGraph(testGraph);
-        TestGraphBuilder.addEdgesToTestGraph(testGraph);
+        TestGraphBuilder.addNodesToBasicTestGraph(testGraph);
+        TestGraphBuilder.addEdgesToBasicTestGraph(testGraph);
         return testGraph;
     }
 
-    /**
-     * Adds nodes to the test graph.
-     *
-     * @param graph The test graph.
-     */
-    private static void addNodesToTestGraph(Graph graph) {
+    private static void addNodesToBasicTestGraph(Graph graph) {
         graph.addNode(new Node(1, "1", 0, 0));
         graph.addNode(new Node(2, "2", 1, 0));
         graph.addNode(new Node(3, "3", 2, 0));
@@ -41,12 +36,7 @@ public class TestGraphBuilder {
         graph.addNode(new Node(12, "12", 0, 2));
     }
 
-    /**
-     * Adds edges to the test graph.
-     *
-     * @param graph The test graph.
-     */
-    private static void addEdgesToTestGraph(Graph graph) {
+    private static void addEdgesToBasicTestGraph(Graph graph) {
         graph.addEdge(new Edge(1, 2, 1));
         graph.addEdge(new Edge(2, 3, 1));
         graph.addEdge(new Edge(3, 4, 1));

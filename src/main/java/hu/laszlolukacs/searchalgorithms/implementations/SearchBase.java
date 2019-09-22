@@ -18,7 +18,7 @@ public abstract class SearchBase implements SearchAlgorithm {
     /**
      * The nodes queued to be processed by the algorithm.
      */
-    protected Queue<Node> open;
+    protected Deque<Node> open;
 
     /**
      * The nodes which have been already processed by the algorithm.
